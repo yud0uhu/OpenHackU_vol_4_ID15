@@ -21,6 +21,11 @@ line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
 
+@app.route("/index", methods=['POST'])
+def index():
+    return 'OK'
+
+
 @app.route("/")
 def hello_world():
     return "hello world!"
@@ -46,6 +51,9 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    if event.reply_token == "00000000000000000000000000000000":
+        return
+
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=event.message.text))
@@ -55,3 +63,10 @@ if __name__ == "__main__":
     #    app.run()
     port = int(os.getenv("PORT"))
     app.run(host="0.0.0.0", port=port)
+
+    # get request body as text
+    body = request.get_data(as_text=True)
+    app.logger.info("Request body: " + body)
+    print("----1----")
+    print(body)
+    print("----2----")
