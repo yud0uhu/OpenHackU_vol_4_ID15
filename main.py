@@ -12,9 +12,10 @@ from linebot.models import (
 
 app = Flask(__name__)
 
-line_bot_api = LineBotApi('2f785eda6e1e891ed9cf1c58592717b5')
+line_bot_api = LineBotApi(
+    '0F0ruLLyrRShKHfjJgSxMyW0A+ZWGdpYewXwweClo5QMGK4ML9DbucKPd8UfXK7B/b39il/kPp5GQq7jvImnzdBEQc6gMukxEJSOAv5n+8UzdsUMPmcfTMTbh22oBR2CSHGDHD5x+lS7LYcZkYXDVQdB04t89/1O/w1cDnyilFU=" --app food-conversion-bot-niku')
 handler = WebhookHandler(
-    '0F0ruLLyrRShKHfjJgSxMyW0A+ZWGdpYewXwweClo5QMGK4ML9DbucKPd8UfXK7B/b39il/kPp5GQq7jvImnzdBEQc6gMukxEJSOAv5n+8UzdsUMPmcfTMTbh22oBR2CSHGDHD5x+lS7LYcZkYXDVQdB04t89/1O/w1cDnyilFU=')
+    '2f785eda6e1e891ed9cf1c58592717b5')
 
 
 @app.route("/callback", methods=['POST'])
