@@ -12,6 +12,8 @@
 ```$ heroku config:set YOUR_CHANNEL_ACCESS_TOKEN="アクセストークンの文字列" --app アプリ名```  
 
 - 補足 Herokuにデプロイ後、Config Varsで設定するのでもOK  
+![2021-03-06 (6)_LI](https://user-images.githubusercontent.com/60646787/110207635-25f05b00-7ec8-11eb-8a3b-1eb64a287c11.jpg)
+  
   
 ## 新しい Heroku アプリの作成  
 ```$ heroku create アプリ名```  
