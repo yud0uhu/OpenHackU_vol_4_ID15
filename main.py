@@ -57,9 +57,25 @@ return 'OK'
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+
+    # reply_tokenが特定の値だった場合に処理終了
+    if event.reply_token == "00000000000000000000000000000000":
+        return
+
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=event.message.text))  # ここでオウム返しのメッセージを返します。
+        TextSendMessage(text=event.message.text))
+
+@handler.add(MessageEvent, message=StickerMessage)
+def handle_video(event):
+
+    # reply_tokenが特定の値だった場合に処理終了
+    if event.reply_token == "ffffffffffffffffffffffffffffffff":
+        return
+
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text="Sticker"))
 
 
 # ポート番号の設定
