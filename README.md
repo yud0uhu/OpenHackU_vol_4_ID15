@@ -42,7 +42,6 @@ Password for 'https://yud0uhu@github.com': <b>AccountにあるAPI Key</b>
 fatal: 'heroku' does not appear to be a git repository  
 fatal: Could not read from remote repository.  
   
-```
 Please make sure you have the correct access rights  
 and the repository exists.  
 ```
