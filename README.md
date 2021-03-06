@@ -30,11 +30,11 @@ Username for 'https://github.com': メールアドレス
 Password for 'https://yud0uhu@github.com': <b>AccountにあるAPI Key</b>  
 ```
   
-GitHubに(個人用ブランチを切って)pushする  
+- GitHubに(個人用ブランチを切って)pushする  
 ```$ git checkout -b ブランチ名```  
 ```$ git push origin ブランチ名```  
   
-##エラー対処  
+## エラー対処  
 ```git push heroku```で  
 ```$ \linebot>git push heroku```  
 ```fatal: 'heroku' does not appear to be a git repository```  
