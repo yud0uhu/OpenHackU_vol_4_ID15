@@ -1,4 +1,5 @@
 from flask import Flask, request, abort
+import os
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -12,10 +13,17 @@ from linebot.models import (
 
 app = Flask(__name__)
 
-line_bot_api = LineBotApi(
-    '0F0ruLLyrRShKHfjJgSxMyW0A+ZWGdpYewXwweClo5QMGK4ML9DbucKPd8UfXK7B/b39il/kPp5GQq7jvImnzdBEQc6gMukxEJSOAv5n+8UzdsUMPmcfTMTbh22oBR2CSHGDHD5x+lS7LYcZkYXDVQdB04t89/1O/w1cDnyilFU=" --app food-conversion-bot-niku')
-handler = WebhookHandler(
-    '2f785eda6e1e891ed9cf1c58592717b5')
+# 環境変数取得
+YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
+YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
+
+line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
+handler = WebhookHandler(YOUR_CHANNEL_SECRET)
+
+
+@app.route("/")
+def hello_world():
+    return "hello world!"
 
 
 @app.route("/callback", methods=['POST'])
@@ -31,7 +39,6 @@ def callback():
     try:
         handler.handle(body, signature)
     except InvalidSignatureError:
-        print("Invalid signature. Please check your channel access token/channel secret.")
         abort(400)
 
     return 'OK'
@@ -45,4 +52,6 @@ def handle_message(event):
 
 
 if __name__ == "__main__":
-    app.run()
+    #    app.run()
+    port = int(os.getenv("PORT"))
+    app.run(host="0.0.0.0", port=port)
