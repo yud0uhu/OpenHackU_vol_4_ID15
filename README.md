@@ -19,7 +19,12 @@
 - リネームは ```$ heroku rename 新しい名前 --app 古い名前```  
   
 ## デプロイ  
-```$ git push heroku```  
+- (個人の)メインブランチにデプロイ  
+```$ git push heroku master```  
+- 共用リボジトリの個人用ブランチから、herokuのmasterにデプロイする  
+```git push heroku ブランチの名前:master --force```  
+**Herokuにはmasterにデプロイしなければ、remote: Pushed to non-master branch, skipping build.というbuild errorになる**
+  
 ```
 Username for 'https://github.com': メールアドレス  
 Password for 'https://yud0uhu@github.com': <b>AccountにあるAPI Key</b>  
