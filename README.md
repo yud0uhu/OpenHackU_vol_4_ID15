@@ -29,7 +29,7 @@
   
 ```
 Username for 'https://github.com': メールアドレス  
-Password for 'https://yud0uhu@github.com': <b>AccountにあるAPI Key</b>  
+Password for 'https://yud0uhu@github.com': **AccountにあるAPI Key**  
 ```
   
 - GitHubに(個人用ブランチを切って)pushする  
