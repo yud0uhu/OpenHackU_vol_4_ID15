@@ -1,4 +1,5 @@
 from flask import Flask, request, abort
+# 環境変数取得用
 import os
 
 from linebot import (
@@ -12,6 +13,10 @@ from linebot.models import (
 )
 
 app = Flask(__name__)
+
+# オリジナルの処理
+# line_bot_api = LineBotApi('YOUR_CHANNEL_ACCESS_TOKEN')
+# handler = WebhookHandler('YOUR_CHANNEL_SECRET')
 
 # 環境変数取得
 YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
@@ -51,7 +56,5 @@ def handle_message(event):
         TextSendMessage(text=event.message.text))
 
 
-if __name__ == "__main__":
-    #    app.run()
-    port = int(os.getenv("PORT"))
-    app.run(host="0.0.0.0", port=port)
+if __name__ == '__main__':
+    app.run(debug=False, host='0.0.0.0', port=5000)
