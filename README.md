@@ -57,8 +57,9 @@ https://qiita.com/q_masa/items/c9db3e8396fb62cc64ed
   
 ## 参考/デプロイ系  
 https://uepon.hatenadiary.com/entry/2018/07/27/002843  
-https://qiita.com/shimajiri/items/cf7ccf69d184fdb2fb26#flask%E3%81%A8line-bot-sdk%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB  
+https://qiita.com/shimajiri/items/cf7ccf69d184fdb2fb26#flask%E3%81%A8line-bot-sdk%E3%82%92%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB (ベース)  
 https://devcenter.heroku.com/ja/articles/git (Heroku公式/Gitを使用したデプロイ)  
+https://qiita.com/kaonashikun/items/8004dfc9deea6c25754b (WebHook連携でのエラーとコードの説明が詳しい)  
   
 ## 公式SDK  
 https://github.com/line/line-bot-sdk-python  
