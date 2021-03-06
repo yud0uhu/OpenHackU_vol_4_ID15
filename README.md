@@ -38,10 +38,10 @@ Password for 'https://yud0uhu@github.com': <b>AccountにあるAPI Key</b>
   
 ## エラー対処  
 ```git push heroku```で  
-```$ \linebot>git push heroku```  
-```fatal: 'heroku' does not appear to be a git repository```  
-```fatal: Could not read from remote repository.```  
- 
+```$ \linebot>git push heroku   
+fatal: 'heroku' does not appear to be a git repository  
+fatal: Could not read from remote repository.  
+  
 ```
 Please make sure you have the correct access rights  
 and the repository exists.  
