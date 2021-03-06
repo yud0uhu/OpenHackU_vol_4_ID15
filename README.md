@@ -66,3 +66,4 @@ https://github.com/line/line-bot-sdk-python
 - (WSL)herokuコマンドには**sudo**が必要  
 - http://smot93516.hatenablog.jp/entry/2018/10/09/115933  
 - https://reasonable-code.com/heroku-config/ (Herokuで環境変数を確認・設定・削除する方法)  
+- https://qiita.com/wroc/items/d15b1015c899b0cf77da (Herokuにmasterブランチ以外をdeployする方法)
