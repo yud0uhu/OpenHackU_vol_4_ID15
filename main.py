@@ -48,16 +48,16 @@ def callback():
 
 
 @handler.add(MessageEvent, message=TextMessage)
-　　　　def handle_text_message(event):
-　　　　　　　　　　　　text = event.message.text
-　　　　　　　　　　　　if text in ['やかましいわ', '知らんがな', 'ザイフ']:
-　　　　　　　　　　　　　　　　　　　　line_bot_api.reply_message(
+　　　　　　　　def handle_text_message(event):
+　　　　　　　　　　　　　　　　　　　　　　　　text = event.message.text
+　　　　　　　　　　　　　　　　　　　　　　　　if text in ['やかましいわ', '知らんがな', 'ザイフ']:
+　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　line_bot_api.reply_message(
     event.reply_token,
-    sticker_message=StickerSendMessage(
+    StickerSendMessage(
         package_id='1',
         sticker_id='1'
     ))
-　　　　　　　　　　　　else:
+　　　　　　　　　　　　　　　　　　　　　　　　else:
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=event.message.text))
