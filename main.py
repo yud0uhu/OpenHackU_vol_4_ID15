@@ -1,18 +1,19 @@
-from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
+from flask import Flask, request, abort
+
+from linebot import (
+    LineBotApi, WebhookHandler
 )
 from linebot.exceptions import (
     InvalidSignatureError
 )
-from linebot import (
-    LineBotApi, WebhookHandler
+from linebot.models import (
+    MessageEvent, TextMessage, TextSendMessage,
 )
-from flask import Flask, request, abort
-import os
 
+import os
+# 変更①。MeCabのimportとobject宣言を追記
 import MeCab
 m = MeCab.Tagger('')
-
 
 app = Flask(__name__)
 
@@ -22,11 +23,6 @@ YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
 
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
-
-
-@app.route("/")
-def hello_world():
-    return "hello world!"
 
 
 @app.route("/callback", methods=['POST'])
@@ -58,5 +54,6 @@ def handle_message(event):
 
 
 if __name__ == "__main__":
+    #    app.run()
     port = int(os.getenv("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
