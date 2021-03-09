@@ -43,13 +43,24 @@ def callback():
 
     return 'OK'
 
+# 特定のキーワードに対して返信する、それ以外はオウム返しをする仕様
+# オウム返しで渡しているevent.message.textの文字列に母音の類語を渡したい
+
 
 @handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
+　　　　def handle_text_message(event):
+　　　　　　　　　　　　text = event.message.text
+　　　　　　　　　　　　if text in ['やかましいわ', '知らんがな', 'ザイフ']:
+　　　　　　　　　　　　　　　　　　　　line_bot_api.reply_message(
+    event.reply_token,
+    sticker_message=StickerSendMessage(
+        package_id='1',
+        sticker_id='1'
+    ))
+　　　　　　　　　　　　else:
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=event.message.text))
-
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
