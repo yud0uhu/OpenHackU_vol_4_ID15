@@ -11,6 +11,7 @@ from linebot.models import (
 )
 import os
 import dajaregen as dj
+import kaiseki as kk
 
 app = Flask(__name__)
 
@@ -55,6 +56,7 @@ def callback():
 def handle_message(event):
     word = event.message.text
     dajare_text = dj.dajare_search(word)
+    kaiseki_text = kk.word_kaiseki(word)
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=dajare_text))
