@@ -11,6 +11,9 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
 
+import dajaregen as dajare_search
+import furigana
+
 app = Flask(__name__)
 
 # 環境変数取得
@@ -46,9 +49,18 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    word = event.message.text
+
+
+try:
+    dajare_text = dj.dajare_search(word)
+    dajare_text = furigana.main(dajare_text)
+except IndexError:
+    dajare_text = 'ごめんなさい！\nそのお題(だい)で、だじゃれはおもいつきませんでした...'
+
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=event.message.text))
+        TextSendMessage(text=dajare_text))
 
 
 if __name__ == "__main__":
