@@ -16,8 +16,8 @@ import kaiseki as kk
 app = Flask(__name__)
 
 # 環境変数取得
-#YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
-#YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
+# YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
+# YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
 
 # 自分のチャネルトークンを書く、Herokuデプロイ時は不要
 line_bot_api = LineBotApi(
@@ -25,8 +25,8 @@ line_bot_api = LineBotApi(
 # 自分のチャネルシークレットを書く、Herokuデプロイ時は不要
 handler = WebhookHandler('168c266a7d5b15a5730f456703c7160b')
 
-#line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
-#handler = WebhookHandler(YOUR_CHANNEL_SECRET)
+# line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
+# handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
 
 @app.route("/")
@@ -55,11 +55,12 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     word = event.message.text
-    dajare_text = dj.dajare_search(word)
+#    dajare_text = dj.dajare_search(word)
     kaiseki_text = kk.word_kaiseki(word)
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=dajare_text))
+        #        TextSendMessage(text=dajare_text))
+        TextSendMessage(text=kaiseki_text))
 
 
 if __name__ == "__main__":
