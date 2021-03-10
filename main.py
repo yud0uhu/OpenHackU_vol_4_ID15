@@ -1,5 +1,4 @@
 from flask import Flask, request, abort
-import os
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -10,18 +9,20 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
-
-import dajaregen as dajare_search
-import furigana
+import os
+import dajaregen as dj
 
 app = Flask(__name__)
 
 # 環境変数取得
-YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
-YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
+#YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
+#YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
 
-line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
-handler = WebhookHandler(YOUR_CHANNEL_SECRET)
+line_bot_api = LineBotApi(
+    '/DiRhoeKEIwKHh6HFr+5cD1Je/5stHPbqXpC0QtT9kdDHdiOvfWIdbMx49c/F40G/b39il/kPp5GQq7jvImnzdBEQc6gMukxEJSOAv5n+8X0gBzc1AE4x1IKybZrH04Hie5nAG8y4eIyJkQJZgDMsgdB04t89/1O/w1cDnyilFU=')
+handler = WebhookHandler('168c266a7d5b15a5730f456703c7160b')
+#line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
+#handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
 
 @app.route("/")
@@ -50,19 +51,13 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     word = event.message.text
-
-
-try:
     dajare_text = dj.dajare_search(word)
-    dajare_text = furigana.main(dajare_text)
-except IndexError:
-    dajare_text = 'ごめんなさい！\nそのお題(だい)で、だじゃれはおもいつきませんでした...'
-
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=dajare_text))
 
 
 if __name__ == "__main__":
+    #    app.run()
     port = int(os.getenv("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
