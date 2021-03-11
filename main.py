@@ -82,6 +82,14 @@ def handle_message(event):
             text="ぜんざい", quick_reply=QuickReply(items=items))
         line_bot_api.reply_message(event.reply_token, messages=messages)
 
+    elif len(event.message.text > 10):
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage("ちょっと単語が長すぎるなぁ…"))
+
+    # elif type(event.message) == 'sticker':
+    #     line_bot_api.reply_message(
+    #         event.reply_token,
+    #         StickerSendMessage(package_id=sticker_list[4][0], sticker_id=sticker_list[4][1]))
     else:
         word = event.message.text
     #    dajare_text = dj.dajare_search(word)
@@ -92,6 +100,18 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=kaiseki_text))
+
+
+@handler.add(MessageEvent, message=StickerMessage)
+def handle_message(event):
+    line_bot_api.reply_message(event.reply_token,
+                               StickerSendMessage(package_id=11539, sticker_id=52114129))
+
+
+@handler.add(MessageEvent, message=ImageMessage)
+def handle_message(event):
+    line_bot_api.reply_message(event.reply_token,
+                               StickerSendMessage(package_id=11538, sticker_id=51626506))
 
 
 if __name__ == "__main__":
