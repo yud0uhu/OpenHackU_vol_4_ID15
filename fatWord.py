@@ -6,6 +6,12 @@ import pandas as pd
 def message_generate(query):
     # ユーザー側の入力ワード
     target_word_origin = query
+
+# 4文字で分ける
+# 1~4
+# 4~7
+# 6~10
+
     # ローマ字へ変換
     kakasi = pykakasi.kakasi()
 
@@ -20,7 +26,10 @@ def message_generate(query):
     target_word_vo = re.sub(r"[^aeiou]+", "", target_word)
 
     # このdfの右辺に挿入するものを入れていく感じ
-    df = pd.read_csv('/home/denham/OpenHackU_vol_4_ID3/fatlist.csv')
+    # 短め単語リスト
+#    df = pd.read_csv('/home/denham/OpenHackU_vol_4_ID3/ver2.csv')
+    # 長め単語リスト
+    df = pd.read_csv('/home/denham/OpenHackU_vol_4_ID3/ver2.csv')
 
     df['ローマ字'] = df['原文'].apply(convert_to_romaji)
     df['抽出'] = df['ローマ字'].apply(get_vowel)
@@ -135,7 +144,7 @@ def get_idx_score(vowel_data, target_word):
 
 
 def get_vowel(doc):
-    return re.findall('[aiueo]', doc)
+    return re.findall('n[qwrtypsdfghjklzxcvbnm]|[aiueo]', doc)
 
 
 def convert_to_romaji(text):
