@@ -8,7 +8,8 @@ from linebot.exceptions import (
 )
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
-    QuickReplyButton, MessageAction, QuickReply, StickerSendMessage, FollowEvent
+    QuickReplyButton, MessageAction, QuickReply,
+    StickerMessage, StickerSendMessage, FollowEvent, ImageMessage, ImageSendMessage
 )
 import os
 import fatWord as fw
@@ -17,14 +18,15 @@ import random
 app = Flask(__name__)
 
 # 環境変数取得
-YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
-YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
+#YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
+#YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
 
 # 自分のチャネルトークンを書く、Herokuデプロイ時は不要
 # 自分のチャネルシークレットを書く、Herokuデプロイ時は不要
 
-line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
-handler = WebhookHandler(YOUR_CHANNEL_SECRET)
+line_bot_api = LineBotApi(
+    "/DiRhoeKEIwKHh6HFr+5cD1Je/5stHPbqXpC0QtT9kdDHdiOvfWIdbMx49c/F40G/b39il/kPp5GQq7jvImnzdBEQc6gMukxEJSOAv5n+8X0gBzc1AE4x1IKybZrH04Hie5nAG8y4eIyJkQJZgDMsgdB04t89/1O/w1cDnyilFU=")
+handler = WebhookHandler("168c266a7d5b15a5730f456703c7160b")
 
 
 @app.route("/")
@@ -76,15 +78,15 @@ def handle_message(event):
             event.reply_token,
             StickerSendMessage(package_id=sticker_list[r][0], sticker_id=sticker_list[r][1]))
 
-    elif event.message.text == "まんざい" or "漫才":
+    elif event.message.text == "まんざい" or event.message.text == "漫才":
         # 本来はここで韻を踏んだもの(text)を受け取って送る
         messages = TextSendMessage(
             text="ぜんざい", quick_reply=QuickReply(items=items))
         line_bot_api.reply_message(event.reply_token, messages=messages)
 
-    elif len(event.message.text > 10):
-        line_bot_api.reply_message(
-            event.reply_token, TextSendMessage("ちょっと単語が長すぎるなぁ…"))
+#    elif len(int(event.message.text) > 10):
+#        line_bot_api.reply_message(
+#            event.reply_token, TextSendMessage("ちょっと単語が長すぎるなぁ…"))
 
     # elif type(event.message) == 'sticker':
     #     line_bot_api.reply_message(
@@ -102,12 +104,16 @@ def handle_message(event):
             TextSendMessage(text=kaiseki_text))
 
 
+# 数字やローマ字、不可能な変換の時の処理
+
+# スタンプメッセージを受け取ったとき
 @handler.add(MessageEvent, message=StickerMessage)
 def handle_message(event):
     line_bot_api.reply_message(event.reply_token,
                                StickerSendMessage(package_id=11539, sticker_id=52114129))
 
 
+# 画像メッセージを受け取ったとき
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_message(event):
     line_bot_api.reply_message(event.reply_token,
@@ -115,6 +121,5 @@ def handle_message(event):
 
 
 if __name__ == "__main__":
-    #    app.run()
     port = int(os.getenv("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
