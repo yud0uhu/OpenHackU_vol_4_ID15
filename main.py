@@ -124,10 +124,6 @@ def handle_message(event):
         #         StickerSendMessage(package_id=sticker_list[4][0], sticker_id=sticker_list[4][1]))
     else:
         word = event.message.text
-    #    dajare_text = dj.dajare_search(word)
-    #    kaiseki_text = kk.convert_to_romaji(word)
-    #    kaiseki_text = lb.message_generate(word)
-    #    kaiseki_text = op.message_generate(word)
         kaiseki_text = fw.message_generate(word)
         line_bot_api.reply_message(
             event.reply_token,
