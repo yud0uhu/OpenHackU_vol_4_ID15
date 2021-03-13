@@ -7,6 +7,8 @@ def message_generate(query):
     # ユーザー側の入力ワード
     target_word_origin = query
 
+# 3段階でワードリストを作る
+# 「太る」ベクトルはなくす？
 # 4文字で分ける
 # 1~4
 # 4~7
@@ -29,7 +31,7 @@ def message_generate(query):
     # 短め単語リスト
 #    df = pd.read_csv('/home/denham/OpenHackU_vol_4_ID3/ver2.csv')
     # 長め単語リスト
-    df = pd.read_csv('/home/denham/OpenHackU_vol_4_ID3/ver2.csv')
+    df = pd.read_csv('/home/denham/OpenHackU_vol_4_ID3/ver3.csv')
 
     df['ローマ字'] = df['原文'].apply(convert_to_romaji)
     df['抽出'] = df['ローマ字'].apply(get_vowel)
