@@ -19,15 +19,12 @@ import fatWord as fw
 app = Flask(__name__)
 
 # 環境変数取得
-# YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
-# YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
-
-# 自分のチャネルトークンを書く、Herokuデプロイ時は不要
-# 自分のチャネルシークレットを書く、Herokuデプロイ時は不要
+YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
+YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
 
 line_bot_api = LineBotApi(
-    "/DiRhoeKEIwKHh6HFr+5cD1Je/5stHPbqXpC0QtT9kdDHdiOvfWIdbMx49c/F40G/b39il/kPp5GQq7jvImnzdBEQc6gMukxEJSOAv5n+8X0gBzc1AE4x1IKybZrH04Hie5nAG8y4eIyJkQJZgDMsgdB04t89/1O/w1cDnyilFU=")
-handler = WebhookHandler("168c266a7d5b15a5730f456703c7160b")
+    "YOUR_CHANNEL_ACCESS_TOKEN")
+handler = WebhookHandler("YOUR_CHANNEL_SECRET")
 
 
 @app.route("/")
